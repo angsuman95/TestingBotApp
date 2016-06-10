@@ -11,6 +11,7 @@ namespace TestingBotApp
     public class TestBotDialog : IDialogFlow
     {
         private StartOptions startOptions;
+        private IEnumerable<string> EOptions = Lists.Options;
 
         public async Task StartAsync(IDialogContext context)
         {
@@ -31,14 +32,14 @@ namespace TestingBotApp
             PromptDialog.Choice(
                 context: context,
                 resume: AlreadyNewAsync,
-                options: List<string>.,
+                options: EOptions,
                 prompt: "Welcome to VAM Insurance Bot!!",
                 retry: "I didn't understand. Please try again.");
         }
 
-        public async Task AlreadyNewAsync(IDialogContext context, IAwaitable<StartOptions> argument)
+        public async Task AlreadyNewAsync(IDialogContext context, IAwaitable<string> argument)
         {
-            startOptions  = await argument;
+            string startOptions  = await argument;
 
             if (startOptions.Equals(StartOptions.Already))
             {
@@ -62,11 +63,5 @@ namespace TestingBotApp
             Already,
             New
         }
-
-        private static List<string> Options = new List<string>()
-        {
-            "Already a customer",
-            "New Customer"
-        };
     }
 }

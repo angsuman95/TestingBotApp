@@ -7,7 +7,7 @@ namespace TestingBotApp
     public interface IDialogFlow : IDialog<object>
     {
         Task WelcomeAsync(IDialogContext context, IAwaitable<Message> argument);
-        Task AlreadyNewAsync(IDialogContext context, IAwaitable<TestBotDialog.StartOptions> argument);
+        //Task AlreadyNewAsync(IDialogContext context, IAwaitable<TestBotDialog.StartOptions> argument);
         //Task PolicyNumberAsync(IDialogContext context, IAwaitable<Message> argument);
         //Task AuthenicateClientAsync(IDialogContext context, IAwaitable<Message> argument);
         //Task ViewRenewFileClaimAsync(IDialogContext context, IAwaitable<Message> argument);
