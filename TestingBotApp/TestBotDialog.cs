@@ -3,13 +3,12 @@ using Microsoft.Bot.Connector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace TestingBotApp
 {
     [Serializable]
-    class TestBotDialog : IDialog<object>
+    public class TestBotDialog : IDialogFlow
     {
         private StartOptions startOptions;
 
@@ -20,13 +19,19 @@ namespace TestingBotApp
 
         public async Task WelcomeAsync(IDialogContext context, IAwaitable<Message> argument)
         {
-            //Message message = await argument;
+            Message message = await argument;
             //await context.PostAsync(message.Text);
 
+            //PromptDialog.Choice(
+            //    context: context,
+            //    resume: AlreadyNewAsync,
+            //    options: Enum.GetValues(typeof(StartOptions)).Cast<StartOptions>().ToArray(),
+            //    prompt: "Welcome to VAM Insurance Bot!!",
+            //    retry: "I didn't understand. Please try again.");
             PromptDialog.Choice(
                 context: context,
                 resume: AlreadyNewAsync,
-                options: Enum.GetValues(typeof(StartOptions)).Cast<StartOptions>().ToArray(),
+                options: List<string>.,
                 prompt: "Welcome to VAM Insurance Bot!!",
                 retry: "I didn't understand. Please try again.");
         }
@@ -42,7 +47,7 @@ namespace TestingBotApp
             }
             else
             {
-                await context.PostAsync("Please visit out website www.abc.com or call on XXXXX for more details." + "\n\n" + "Thank You!!" + "\n\n" + "Have a nice day!");
+                await context.PostAsync("Please visit out website www.abcde.com or call on XXXXX for more details." + "\n\n" + "Thank You!!" + "\n\n" + "Have a nice day!");
                 context.Wait(WelcomeAsync);
             }
         }
@@ -58,6 +63,10 @@ namespace TestingBotApp
             New
         }
 
-        private static IList<string> Options = new List<string>();
+        private static List<string> Options = new List<string>()
+        {
+            "Already a customer",
+            "New Customer"
+        };
     }
 }
